@@ -14,6 +14,21 @@ let questions = [
         question: "5+5",
         correct: "10",
         answers: [6, 8, 10, 15, 12],
+    },
+    {
+        question: "Какой массив объектов обозначен для представления вопросов",
+        correct: "question",
+        answers: ['question', 'answer', 'result'],
+    },
+    {
+        question: "Какое значение вернёт выражение 2+2",
+        correct: "22",
+        answers: [4, 22, 'Ошибка', 'undefined'],
+    },
+    {
+        question: "Что делает querySelector()",
+        correct: "Находит первый элемент",
+        answers: ['Создаёт новый элемент', 'Находит первый элемент', 'Удаляет элемент', 'Изменяет стили элемента'],
     }
 ]
 
@@ -33,7 +48,7 @@ function generate() {
     let answers = questions[current].answers
     let block = ""
     for(let i of answers) {
-        block += `<button class="btn" onclick="check('${i})">${i}</button>`;
+        block += `<button class="btn" onclick="check('${i}')">${i}</button>`;
     }
 
     main.innerHTML += `<nav>${block}</nav>`;
@@ -45,5 +60,19 @@ function check(answer) {
         count += 1;
     }
     current += 1;
-    generate();  
+    if (questions.length > current) {
+         generate()
+    } else {
+        stop()
+    }     
+}
+
+function stop() {
+    start.classList.remove("close"); 
+    main.classList.add("close");
+    result.classList.remove("close");
+
+    result.innerHTML = `Решено ${count} из ${questions.length}`
+    current = 0;
+    count = 0;
 }
