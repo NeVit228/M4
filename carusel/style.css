@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main {
+    display: flex;
+    align-items: center;
+    background: rgba(98, 22, 133, 0.695);
+}
+nav {
+    overflow-x: hidden;
+}
+div {
+    display: flex;
+    transition: 0.5s;
+ /* transform: translateX(-50%); */
+}
+img {
+   /* min-width: 50%; */
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+i {
+    font-size: 40px;
+    color: #FFF;
+    padding: 0 10px;
+    cursor: pointer;
+}
