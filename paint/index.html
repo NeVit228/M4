@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+      let canvas = document.getElementById("canvas");
+      let context = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let config = {
+        lineSize: 5,
+        color: "black",
+      };
+
+      let draw = false;
+
+      canvas.addEventListener("mousedown", (e) => {
+        draw = true;
+        context.beginPath();
+      });
+
+      canvas.addEventListener("mouseup", (e) => {
+        draw = false;
+      });
+
+      canvas.onmousemove = (e) => drawLine(e);
+      function drawLine(e) {
+        if (draw) {
+          context.lineWidth = config.lineSize;
+          context.strokeStyle = config.color;
+          context.lineTo(e.clientX, e.clientY);
+          context.stroke();
+        }
+      }
+
+      function clearCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function saveImage() {
+        let image = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        window.location.href = image;
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code == "Space") {
+            saveImage();
+        }
+        if (e.code == "KeyC") {
+            clearCanvas();
+        }
+        if (e.code == "KeyG") {
+            config.color = "green";
+        }   
+        if (e.code == "KeyR") {
+            config.color = "red";
+        }
+        if (e.key == "2") {
+            config.lineSize = 2;
+        }
+        if (e.key == "1") {
+            config.lineSize = 9;
+        }
+    });
+    </script>
+  </body>
+</html>
