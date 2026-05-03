@@ -46,10 +46,15 @@
       }
 
       function saveImage() {
-        let image = canvas
-          .toDataURL("image/png")
-          .replace("image/png", "image/octet-stream");
-        window.location.href = image;
+      let image = canvas.toDataURL("image/png");
+
+       let link = document.createElement("a");
+                link.href = image;
+                link.download = "image.png";
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
       }
 
       document.addEventListener("keydown", (e) => {
